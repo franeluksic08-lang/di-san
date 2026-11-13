@@ -60,7 +60,7 @@ input{font:inherit;width:100%;padding:12px;border-radius:10px;border:2px solid #
 .rows span:nth-child(2){flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .rows span:last-child{font-variant-numeric:tabular-nums;color:var(--mute)}
 small{color:var(--mute)}
-@media (min-width:900px){#app{flex-direction:row;flex-wrap:wrap}header{flex:0 0 100%}#pano{flex:1 1 60%;height:calc(100dvh - 44px)}#mapwrap{flex:1 1 40%;height:calc(100dvh - 44px);border-top:0;border-left:3px solid var(--card)}}
+@media (min-width:900px){#app{display:grid;grid-template-columns:3fr 2fr;grid-template-rows:auto minmax(0,1fr)}header{grid-column:1/3}#mapwrap{border-top:0;border-left:3px solid var(--card)}}
 </style>
 </head>
 <body>
@@ -141,8 +141,9 @@ function drawHead(){
   $("score").textContent = fmt(total());
 }
 
+const HR = [[42.35,13.4],[46.6,19.5]];
 function initMap(){
-  map = L.map("map", { zoomControl:false, attributionControl:true, maxBounds:[[40.5,11],[48.5,22]], minZoom:5 }).setView([44.6,16.4], 6);
+  map = L.map("map", { zoomControl:false, attributionControl:true, maxBounds:[[40.5,11],[48.5,22]], minZoom:5 }).fitBounds(HR);
   L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom:17, attribution:"© OpenStreetMap" }).addTo(map);
   map.on("click", e => {
     if (results.length > round) return;      // vec pogodeno
@@ -186,7 +187,7 @@ function startRound(){
   tWait = setTimeout(startTimer, 8000);   // ako se slika sporo ucitava, vrijeme svejedno krene
   $("info").style.display = "none";
   $("go").disabled = true; $("go").textContent = "Stavi točku na kartu";
-  map.setView([44.6,16.4], 6);
+  map.fitBounds(HR);
   if (!viewer) initViewer(loc.id); else viewer.moveTo(loc.id).catch(()=>{});
   drawHead();
 }
@@ -251,7 +252,7 @@ function showIntro(){
     <input id="nick" maxlength="16" placeholder="Tvoj nadimak" value="${esc(IME)}" autocomplete="nickname"><button id="st">Kreni</button><p><small>Jedna partija dnevno. Svi igraju ista mjesta.</small></p></div>`;
   $("st").onclick = () => {
     const v = $("nick").value.trim(); if (v.length < 2){ $("nick").focus(); $("nick").style.borderColor = "var(--red)"; return; }
-    IME = v; store.set("disan-ime", IME); $("ov").style.display = "none"; startRound(); setTimeout(() => map.invalidateSize(), 50); };
+    IME = v; store.set("disan-ime", IME); $("ov").style.display = "none"; startRound(); setTimeout(() => { map.invalidateSize(); map.fitBounds(HR); }, 50); };
 }
 
 fetch("dani.json").then(r => r.json()).then(dani => {
