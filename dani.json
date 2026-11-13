@@ -1,0 +1,408 @@
+[
+[
+{
+"id": "425291537260771",
+"ime": "Pula, Arena",
+"lat": 44.87321,
+"lon": 13.84928,
+"autor": "LTuropolec"
+},
+{
+"id": "427286585826746",
+"ime": "Makarska",
+"lat": 43.29501,
+"lon": 17.0171,
+"autor": "SilvioBasic"
+},
+{
+"id": "1819153422560354",
+"ime": "Gospić",
+"lat": 44.54552,
+"lon": 15.37413,
+"autor": "hbogner"
+},
+{
+"id": "422213383931699",
+"ime": "Virovitica",
+"lat": 45.82927,
+"lon": 17.39182,
+"autor": "borovac"
+},
+{
+"id": "1331883858029015",
+"ime": "Glina",
+"lat": 45.33723,
+"lon": 16.09356,
+"autor": "hbogner"
+},
+{
+"id": "787391858808997",
+"ime": "Pag",
+"lat": 44.44401,
+"lon": 15.05736,
+"autor": "standbild360"
+},
+{
+"id": "1600531521553246",
+"ime": "Županja",
+"lat": 45.07535,
+"lon": 18.69756,
+"autor": "zfilipovic1987"
+},
+{
+"id": "3869925903149207",
+"ime": "Lovinac, Lika",
+"lat": 44.38306,
+"lon": 15.67784,
+"autor": "hbogner"
+}
+],
+[
+{
+"id": "1235835657762852",
+"ime": "Vukovar, Vodotoranj",
+"lat": 45.3434,
+"lon": 19.01221,
+"autor": "brackone"
+},
+{
+"id": "3856868994586814",
+"ime": "Rijeka",
+"lat": 45.32622,
+"lon": 14.44742,
+"autor": "Hrvachmrvach"
+},
+{
+"id": "979154237204216",
+"ime": "Sinj",
+"lat": 43.70244,
+"lon": 16.64021,
+"autor": "denisorlic"
+},
+{
+"id": "482057226331786",
+"ime": "Labin",
+"lat": 45.08605,
+"lon": 14.12325,
+"autor": "geogrupa"
+},
+{
+"id": "854016340963213",
+"ime": "Daruvar",
+"lat": 45.593,
+"lon": 17.227,
+"autor": "Ibj308"
+},
+{
+"id": "217477230681454",
+"ime": "Rogoznica",
+"lat": 43.5341,
+"lon": 15.9638,
+"autor": "tomislavzen12"
+},
+{
+"id": "667158249299350",
+"ime": "Slunj",
+"lat": 45.11512,
+"lon": 15.58582,
+"autor": "hbogner"
+},
+{
+"id": "1450473833446342",
+"ime": "kod Imotskog",
+"lat": 43.45342,
+"lon": 17.23602,
+"autor": "tomislavzen12"
+}
+],
+[
+{
+"id": "1326386135570405",
+"ime": "Zagreb, centar",
+"lat": 45.81136,
+"lon": 15.9775,
+"autor": "mapconcierge"
+},
+{
+"id": "1040883061899041",
+"ime": "Zadar",
+"lat": 44.11461,
+"lon": 15.23265,
+"autor": "vst"
+},
+{
+"id": "546125511294671",
+"ime": "Čakovec",
+"lat": 46.38328,
+"lon": 16.43307,
+"autor": "geoprem"
+},
+{
+"id": "1647888236257859",
+"ime": "Metković",
+"lat": 43.05416,
+"lon": 17.64806,
+"autor": "tomislavzen12"
+},
+{
+"id": "1594455227793485",
+"ime": "Delnice",
+"lat": 45.39988,
+"lon": 14.79797,
+"autor": "isvedic"
+},
+{
+"id": "2438615216639128",
+"ime": "Umag",
+"lat": 45.43806,
+"lon": 13.53009,
+"autor": "european-panorama"
+},
+{
+"id": "1076967965083178",
+"ime": "Kistanje",
+"lat": 43.98085,
+"lon": 15.96294,
+"autor": "hbogner"
+},
+{
+"id": "532557809132565",
+"ime": "kod Lovasa",
+"lat": 45.21747,
+"lon": 19.14336,
+"autor": "brackone"
+}
+],
+[
+{
+"id": "31080132128268159",
+"ime": "Rovinj",
+"lat": 45.08114,
+"lon": 13.63793,
+"autor": "mapconcierge"
+},
+{
+"id": "1394169118037221",
+"ime": "Varaždin",
+"lat": 46.30555,
+"lon": 16.33796,
+"autor": "geoprem"
+},
+{
+"id": "2049903182288810",
+"ime": "Knin",
+"lat": 44.04132,
+"lon": 16.19645,
+"autor": "untamed"
+},
+{
+"id": "1332157867841334",
+"ime": "Ogulin",
+"lat": 45.26736,
+"lon": 15.22574,
+"autor": "isvedic"
+},
+{
+"id": "1963753637694251",
+"ime": "Donji Miholjac",
+"lat": 45.76204,
+"lon": 18.16472,
+"autor": "geoprem"
+},
+{
+"id": "174361317932971",
+"ime": "Starigrad Paklenica",
+"lat": 44.29536,
+"lon": 15.43818,
+"autor": "standbild360"
+},
+{
+"id": "833514901952961",
+"ime": "Gvozd",
+"lat": 45.35064,
+"lon": 15.86551,
+"autor": "hbogner"
+},
+{
+"id": "880290936874557",
+"ime": "kod Skradina",
+"lat": 43.8156,
+"lon": 15.9303,
+"autor": "isvedic"
+}
+],
+[
+{
+"id": "1042487044432563",
+"ime": "Plitvička jezera",
+"lat": 44.90492,
+"lon": 15.61219,
+"autor": "hbogner"
+},
+{
+"id": "1065083431926433",
+"ime": "Mali Lošinj",
+"lat": 44.53194,
+"lon": 14.46874,
+"autor": "isvedic"
+},
+{
+"id": "1215013889303937",
+"ime": "Slavonski Brod",
+"lat": 45.16512,
+"lon": 18.0037,
+"autor": "geoprem"
+},
+{
+"id": "759549871419294",
+"ime": "Biograd na Moru",
+"lat": 43.94091,
+"lon": 15.44883,
+"autor": "standbild360"
+},
+{
+"id": "1517625882487993",
+"ime": "Požega",
+"lat": 45.33885,
+"lon": 17.66733,
+"autor": "marin85"
+},
+{
+"id": "1049177784146639",
+"ime": "Novi Vinodolski",
+"lat": 45.12746,
+"lon": 14.78817,
+"autor": "hbogner"
+},
+{
+"id": "1916674872829581",
+"ime": "Perušić",
+"lat": 44.65044,
+"lon": 15.38343,
+"autor": "hbogner"
+},
+{
+"id": "1061458492712758",
+"ime": "kod Muća",
+"lat": 43.72367,
+"lon": 16.50673,
+"autor": "isvedic"
+}
+],
+[
+{
+"id": "2308655396256558",
+"ime": "Zagreb, Glavni kolodvor",
+"lat": 45.80455,
+"lon": 15.97843,
+"autor": "mapconcierge"
+},
+{
+"id": "2812470682398525",
+"ime": "Senj",
+"lat": 44.99036,
+"lon": 14.90081,
+"autor": "standbild360"
+},
+{
+"id": "2953411341657521",
+"ime": "Bjelovar",
+"lat": 45.90208,
+"lon": 16.83442,
+"autor": "Ibj308"
+},
+{
+"id": "1724347684595588",
+"ime": "Samobor",
+"lat": 45.79622,
+"lon": 15.71982,
+"autor": "corpro"
+},
+{
+"id": "3602526033386004",
+"ime": "Vrlika",
+"lat": 43.90615,
+"lon": 16.40513,
+"autor": "isvedic"
+},
+{
+"id": "659468953264967",
+"ime": "Hrvatska Kostajnica",
+"lat": 45.22569,
+"lon": 16.54413,
+"autor": "hbogner"
+},
+{
+"id": "1753210858562180",
+"ime": "Rakovica",
+"lat": 44.99164,
+"lon": 15.64803,
+"autor": "hbogner"
+},
+{
+"id": "854821928806461",
+"ime": "kod Karlobaga",
+"lat": 44.52551,
+"lon": 15.07804,
+"autor": "standbild360"
+}
+],
+[
+{
+"id": "2219714625170414",
+"ime": "Zagreb, centar",
+"lat": 45.81125,
+"lon": 15.97411,
+"autor": "mapconcierge"
+},
+{
+"id": "367959891702802",
+"ime": "Primošten",
+"lat": 43.58596,
+"lon": 15.92225,
+"autor": "SilvioBasic"
+},
+{
+"id": "589911870633928",
+"ime": "Sisak",
+"lat": 45.4868,
+"lon": 16.37418,
+"autor": "tomislavzen12"
+},
+{
+"id": "616898014710369",
+"ime": "Križevci",
+"lat": 46.02053,
+"lon": 16.54494,
+"autor": "Ibj308"
+},
+{
+"id": "997730995346129",
+"ime": "Otočac",
+"lat": 44.86949,
+"lon": 15.23678,
+"autor": "hbogner"
+},
+{
+"id": "1019321067408146",
+"ime": "Novigrad (Istra)",
+"lat": 45.31922,
+"lon": 13.56724,
+"autor": "european-panorama"
+},
+{
+"id": "1497813891042062",
+"ime": "Brinje",
+"lat": 45.00117,
+"lon": 15.13481,
+"autor": "isvedic"
+},
+{
+"id": "1765629968097481",
+"ime": "Sveti Rok, Lika",
+"lat": 44.36249,
+"lon": 15.68687,
+"autor": "hbogner"
+}
+]
+]

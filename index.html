@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="hr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Di san? – pogodi di si u Hrvatskoj</title>
+<meta name="description" content="8 mjesta dnevno. Okreni se oko sebe i pogodi di si u Hrvatskoj.">
+<meta property="og:title" content="Di san? – pogodi di si u Hrvatskoj">
+<meta property="og:description" content="8 mjesta dnevno, 25 sekundi po mjestu. Možeš li bolje od ekipe?">
+<meta property="og:image" content="https://franeluksic08-lang.github.io/di-san/og.png">
+<meta property="og:url" content="https://franeluksic08-lang.github.io/di-san/">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0d1b2a">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 2 2'%3E%3Crect width='2' height='2' fill='%23fff'/%3E%3Crect width='1' height='1' fill='%23e63946'/%3E%3Crect x='1' y='1' width='1' height='1' fill='%23e63946'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://unpkg.com/mapillary-js@4.1.2/dist/mapillary.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<style>
+:root{--bg:#0d1b2a;--card:#14263a;--ink:#f4f1e8;--mute:#9db0c4;--red:#e63946;--blue:#2a6fdb;--ok:#3ecf6e}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;height:100%;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;overflow:hidden}
+#app{display:flex;flex-direction:column;height:100dvh}
+header{display:flex;align-items:center;gap:10px;padding:8px 12px;background:var(--card);font-weight:700}
+.logo{font-size:20px;letter-spacing:.3px}
+.logo i{display:inline-block;width:14px;height:14px;margin-right:7px;vertical-align:-1px;background:
+ conic-gradient(var(--red) 0 25%,#fff 0 50%,var(--red) 0 75%,#fff 0);background-size:14px 14px;border-radius:2px}
+.dots{display:flex;gap:4px;margin-left:auto}
+.dots b{width:16px;height:16px;border-radius:4px;background:#2b4057;font-size:11px;line-height:16px;text-align:center}
+.dots b.cur{outline:2px solid var(--ink)}
+#score{min-width:64px;text-align:right;font-variant-numeric:tabular-nums}
+#pano{flex:1 1 55%;min-height:0;position:relative;background:#000}
+#mly{position:absolute;inset:0}
+.guessing .mapillary-attribution-container{display:none!important}
+#tag{position:absolute;left:10px;top:16px;z-index:5;background:rgba(13,27,42,.82);padding:6px 10px;border-radius:8px;font-size:13px;font-weight:600;pointer-events:none}
+#tbar{position:absolute;left:0;right:0;top:0;height:7px;z-index:6;background:rgba(13,27,42,.6)}#tbar i{display:block;height:100%;width:100%;background:var(--ok);transition:width .1s linear}
+#tbar.low i{background:var(--red)}#tag.low{background:var(--red)}
+#hint{position:absolute;left:50%;bottom:12px;transform:translateX(-50%);z-index:5;background:rgba(13,27,42,.82);padding:6px 12px;border-radius:20px;font-size:13px;pointer-events:none;transition:opacity .5s;white-space:nowrap}
+#mapwrap{flex:1 1 45%;min-height:0;position:relative;border-top:3px solid var(--card)}
+#map{position:absolute;inset:0;background:#aad3df}
+#bar{position:absolute;left:0;right:0;bottom:0;z-index:500;padding:10px;display:flex;gap:10px;align-items:center;pointer-events:none}
+#info{flex:1;background:rgba(13,27,42,.9);border-radius:10px;padding:8px 12px;font-size:14px;line-height:1.3;display:none}
+#info b{font-size:16px}
+button{font:inherit;font-weight:700;border:0;border-radius:10px;padding:13px 22px;background:var(--red);color:#fff;cursor:pointer;pointer-events:auto}
+button:disabled{background:#51606f;color:#aab}
+#go{margin-left:auto}
+.overlay{position:fixed;inset:0;z-index:2000;background:rgba(13,27,42,.96);display:flex;align-items:center;justify-content:center;padding:16px}
+.box{max-width:420px;width:100%;text-align:center}
+.box h1{font-size:44px;margin:0 0 6px}
+.box p{color:var(--mute);line-height:1.5;margin:8px 0}
+.box .big{font-size:40px;font-weight:800;color:var(--ink);margin:10px 0 0}
+.box .em{font-size:30px;letter-spacing:3px;margin:12px 0}
+.box button{width:100%;margin-top:14px;font-size:18px}
+.box button.sec{background:#2b4057}
+#lb{background:#2b4057;padding:6px 10px;border-radius:8px;font-size:16px}
+input{font:inherit;width:100%;padding:12px;border-radius:10px;border:2px solid #2b4057;background:#0a1522;color:var(--ink);text-align:center;font-weight:700;margin-top:8px}
+.stats{display:flex;gap:8px;margin:12px 0}.stats div{flex:1;background:var(--card);border-radius:10px;padding:8px 4px;font-size:12px;color:var(--mute)}.stats b{display:block;font-size:20px;color:var(--ink)}
+.rows .me{background:#1d3a57;font-weight:700}.box{max-height:96dvh;overflow:auto}
+.rows{text-align:left;font-size:14px;margin:12px 0;color:var(--ink)}
+.rows div{display:flex;gap:8px;padding:4px 0;border-bottom:1px solid #22384f}
+.rows span:nth-child(2){flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rows span:last-child{font-variant-numeric:tabular-nums;color:var(--mute)}
+small{color:var(--mute)}
+@media (min-width:900px){#app{flex-direction:row;flex-wrap:wrap}header{flex:0 0 100%}#pano{flex:1 1 60%;height:calc(100dvh - 44px)}#mapwrap{flex:1 1 40%;height:calc(100dvh - 44px);border-top:0;border-left:3px solid var(--card)}}
+</style>
+</head>
+<body>
+<div id="app">
+  <header><span class="logo"><i></i>Di san?</span><span class="dots" id="dots"></span><span id="score">0</span><button id="lb" title="Ljestvica">🏆</button></header>
+  <div id="pano" class="guessing"><div id="mly"></div><div id="tbar"><i></i></div><div id="tag"></div><div id="hint">👆 Povuci prstom i okreni se oko sebe</div></div>
+  <div id="mapwrap"><div id="map"></div>
+    <div id="bar"><div id="info"></div><button id="go" disabled>Stavi točku na kartu</button></div>
+  </div>
+</div>
+<div class="overlay" id="ov"></div>
+
+<script src="https://unpkg.com/mapillary-js@4.1.2/dist/mapillary.js"></script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+const TOKEN = "MLY|29463408883252879|2aba31ca19f2857b7a13ad78d95b6c1d";
+// Ljestvica (Supabase). Dok je prazno, ljestvica je iskljucena, a rezultati se pamte samo na uredaju.
+const SUPA_URL = "https://qvgchejrxulzysmwpgns.supabase.co", SUPA_KEY = "sb_publishable_4PLery8Gcqwj-Mya7fpqow_XrJbqHi8";
+const START = new Date(2026, 10, 13);           // partija #1
+const N = 8, MAXP = 1000, TIME = 25;   // sekundi po mjestu
+const MULT = i => 1 + i * 2 / 7;                // slika 1 = x1 ... slika 8 = x3
+const MAXTOTAL = Math.round([...Array(N)].reduce((s, _, i) => s + MAXP * MULT(i), 0) * 1.1);
+const $ = id => document.getElementById(id);
+const fmt = n => Math.round(n).toLocaleString("hr-HR");
+const store = { get(k){try{return JSON.parse(localStorage.getItem(k))}catch(e){return null}}, set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}} };
+
+const today = new Date(); today.setHours(0,0,0,0);
+const DAY = Math.round((today - START) / 864e5) + 1;
+const KEY = "disan-" + DAY;
+let IME = store.get("disan-ime") || "";
+let UID = store.get("disan-uid"); if (!UID){ UID = (crypto.randomUUID ? crypto.randomUUID() : String(Math.random()).slice(2) + Date.now()); store.set("disan-uid", UID); }
+const esc = t => String(t).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const supa = (path, opt = {}) => fetch(SUPA_URL + "/rest/v1/" + path, { ...opt, headers:{ apikey:SUPA_KEY, Authorization:"Bearer " + SUPA_KEY, "Content-Type":"application/json", ...(opt.headers||{}) } });
+function saveScore(){
+  const pov = store.get("disan-pov") || {}; pov[DAY] = total(); store.set("disan-pov", pov);
+  if (!SUPA_URL) return;
+  supa("rezultati?on_conflict=dan,uid", { method:"POST", headers:{ Prefer:"resolution=ignore-duplicates" },
+    body:JSON.stringify({ dan:DAY, uid:UID, ime:IME || "Anonimac", bodovi:total(), kocke:results.map(r => emoji(r.d)).join("") }) }).catch(()=>{});
+}
+function stats(){
+  const pov = store.get("disan-pov") || {}, ks = Object.keys(pov).map(Number), v = Object.values(pov);
+  let niz = 0; for (let d = DAY; pov[d] != null; d--) niz++;
+  return { n:v.length, avg:v.length ? v.reduce((a,b)=>a+b,0)/v.length : 0, best:v.length ? Math.max(...v) : 0, niz };
+}
+async function showBoard(){
+  const back = results.length >= N ? showEnd : () => { $("ov").style.display = "none"; };
+  $("ov").style.display = "flex";
+  $("ov").innerHTML = `<div class="box"><h1 style="font-size:30px">🏆 Ljestvica #${DAY}</h1><div class="rows" id="lbrows"><p>Učitavam…</p></div><button class="sec" id="bk">Natrag</button></div>`;
+  $("bk").onclick = back;
+  if (!SUPA_URL){ $("lbrows").innerHTML = `<p>Zajednička ljestvica se pali uskoro.<br>Tvoji rezultati se za sada pamte na ovom uređaju.</p>`; return; }
+  try {
+    const rows = await (await supa(`rezultati?dan=eq.${DAY}&select=ime,bodovi,uid&order=bodovi.desc,created_at.asc&limit=100`)).json();
+    $("lbrows").innerHTML = rows.length ? rows.map((r,i)=>`<div class="${r.uid===UID?"me":""}"><span>${i<3?["🥇","🥈","🥉"][i]:i+1+"."}</span><span>${esc(r.ime)}</span><span>${fmt(r.bodovi)}</span></div>`).join("") : "<p>Još nitko nije završio. Budi prvi!</p>";
+  } catch(e){ $("lbrows").innerHTML = "<p>Ljestvica trenutno ne radi.</p>"; }
+}
+let tEnd = 0, tInt = null, tWait = null;
+let LOCS = [], round = 0, results = [], guess = null, viewer, map, gMarker, layers = [];
+
+function km(a, b){ const R=6371, r=Math.PI/180, dLa=(b.lat-a.lat)*r, dLo=(b.lon-a.lon)*r;
+  const h=Math.sin(dLa/2)**2+Math.cos(a.lat*r)*Math.cos(b.lat*r)*Math.sin(dLo/2)**2; return 2*R*Math.asin(Math.sqrt(h)); }
+function points(d, i){ return Math.round((d < 1 ? MAXP : MAXP * Math.exp(-d / 90)) * MULT(i)); }
+const FULL = 10, BONUS = 1.1;       // prvih 10 s bodovi x1,1, onda -0,05 svake 2 s, najmanje x0,80
+const speed = used => used <= FULL ? BONUS : Math.max(0.8, Math.round((BONUS - 0.05 * (Math.floor((Math.min(used, TIME - 0.01) - FULL) / 2) + 1)) * 100) / 100);
+const emoji = d => d == null ? "⬛" : d < 25 ? "🟩" : d < 80 ? "🟨" : d < 180 ? "🟧" : "🟥";
+const total = () => results.reduce((s, r) => s + r.p, 0);
+
+function pick(all){            // za svaku tezinu 1..8 po jedna lokacija, rotira se po danima
+  const out = [];
+  for (let t = 1; t <= N; t++){
+    const L = all.filter(x => x.t === t);
+    out.push(L[(DAY - 1 + t * 3) % L.length]);
+  }
+  return out;
+}
+
+function drawHead(){
+  $("dots").innerHTML = [...Array(N)].map((_, i) => `<b class="${i===round&&results.length<N?"cur":""}">${results[i]?emoji(results[i].d):""}</b>`).join("");
+  $("score").textContent = fmt(total());
+}
+
+function initMap(){
+  map = L.map("map", { zoomControl:false, attributionControl:true, maxBounds:[[40.5,11],[48.5,22]], minZoom:5 }).setView([44.6,16.4], 6);
+  L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom:17, attribution:"© OpenStreetMap" }).addTo(map);
+  map.on("click", e => {
+    if (results.length > round) return;      // vec pogodeno
+    guess = { lat:e.latlng.lat, lon:e.latlng.lng };
+    if (!gMarker) gMarker = L.circleMarker(e.latlng, { radius:9, color:"#fff", weight:3, fillColor:"#e63946", fillOpacity:1 }).addTo(map);
+    else gMarker.setLatLng(e.latlng);
+    $("go").disabled = false; $("go").textContent = "Tu san!";
+  });
+}
+
+function initViewer(id){
+  viewer = new mapillary.Viewer({ accessToken:TOKEN, container:"mly", imageId:id,
+    component:{ cover:false, direction:false, sequence:false, keyboard:false, bearing:false, zoom:false, cache:false } });
+  viewer.on("image", () => { try{ viewer.setZoom(0); }catch(e){} startTimer(); });
+  $("mly").addEventListener("pointerdown", () => $("hint").style.opacity = 0, { once:true });
+}
+
+function tagText(sec){ return `Mjesto ${round+1}/${N} · ×${MULT(round).toFixed(1).replace(".",",")}` + (sec == null ? "" : ` · ⏱ ${sec}`); }
+function stopTimer(){ clearInterval(tInt); clearTimeout(tWait); tInt = null; }
+function startTimer(){            // krece kad se slika ucita; kraj se pamti da osvjezavanje stranice ne vrati vrijeme
+  if (tInt || results.length > round || round >= N) return;
+  clearTimeout(tWait);
+  const s = store.get(KEY) || {};
+  if (s.r === round && s.end) tEnd = s.end; else { tEnd = Date.now() + TIME * 1000; store.set(KEY, { results, r:round, end:tEnd }); }
+  const tick = () => {
+    const left = tEnd - Date.now(), sec = Math.max(0, Math.ceil(left / 1000));
+    $("tbar").firstChild.style.width = Math.max(0, left / (TIME * 10)) + "%";
+    $("tbar").classList.toggle("low", sec <= 5); $("tag").classList.toggle("low", sec <= 5);
+    $("tag").textContent = tagText(sec) + (TIME - left / 1000 <= FULL ? " ⚡" : "");
+    if (left <= 0) reveal();
+  };
+  tick(); tInt = setInterval(tick, 100);
+}
+
+function startRound(){
+  const loc = LOCS[round];
+  guess = null; layers.forEach(l => map.removeLayer(l)); layers = [];
+  if (gMarker){ map.removeLayer(gMarker); gMarker = null; }
+  $("pano").classList.add("guessing");
+  stopTimer(); $("tag").textContent = tagText(TIME); $("tag").classList.remove("low"); $("tbar").classList.remove("low"); $("tbar").firstChild.style.width = "100%"; $("tbar").style.display = "block";
+  tWait = setTimeout(startTimer, 8000);   // ako se slika sporo ucitava, vrijeme svejedno krene
+  $("info").style.display = "none";
+  $("go").disabled = true; $("go").textContent = "Stavi točku na kartu";
+  map.setView([44.6,16.4], 6);
+  if (!viewer) initViewer(loc.id); else viewer.moveTo(loc.id).catch(()=>{});
+  drawHead();
+}
+
+function reveal(){
+  if (results.length > round) return;
+  stopTimer(); $("tbar").style.display = "none"; $("tag").classList.remove("low"); $("tag").textContent = tagText();
+  const used = tEnd ? TIME - (tEnd - Date.now()) / 1000 : 0, sp = speed(used);
+  const loc = LOCS[round], d = guess ? km(guess, loc) : null, p = guess ? Math.round(points(d, round) * sp) : 0;
+  results.push({ d:d == null ? null : Math.round(d), p });
+  store.set(KEY, { results });
+  const b = [loc.lat, loc.lon];
+  layers.push(L.circleMarker(b, { radius:10, color:"#fff", weight:3, fillColor:"#3ecf6e", fillOpacity:1 }).addTo(map));
+  if (guess){ const a = [guess.lat, guess.lon];
+    layers.push(L.polyline([a, b], { color:"#0d1b2a", weight:3, dashArray:"6 8" }).addTo(map));
+    map.fitBounds([a, b], { padding:[50,50], maxZoom:12 });
+  } else map.setView(b, 8);
+  $("go").disabled = false;
+  $("pano").classList.remove("guessing");
+  $("info").style.display = "block";
+  $("info").innerHTML = `<b>${loc.ime}</b><br>${emoji(d)} ${d==null?"Isteklo vrijeme!":d<1?"Pogodak!":"fulano za "+fmt(d)+" km"} · <b>+${fmt(p)}</b>${d!=null?`<br><small>${(sp>1?"⚡ bonus za brzinu ×":sp==1?"brzina ×":"🐢 brzina ×")+sp.toFixed(2).replace(".",",")}</small>`:""}`;
+  $("go").textContent = round + 1 < N ? "Dalje →" : "Rezultat";
+  drawHead();
+}
+
+$("go").onclick = () => {
+  if (results.length === round){ if (guess) reveal(); return; }
+  round++;
+  if (round < N) startRound(); else { saveScore(); showEnd(); }
+};
+
+function shareText(){
+  return `Di san? #${DAY}\n${results.map(r => emoji(r.d)).join("")}\n${fmt(total())} / ${fmt(MAXTOTAL)} bodova\n${location.origin + location.pathname}`;
+}
+function titula(t){ const q = t / MAXTOTAL;
+  return q > .85 ? "Živi GPS 🛰️" : q > .65 ? "Taksist s 30 godina staža 🚕" : q > .45 ? "Solidan suvozač 🗺️" : q > .25 ? "Turist s kartom naopako 🧳" : "Izgubljen ka pivac u Zagrebu 🐓"; }
+
+function showEnd(){
+  const t = total(), st = stats(), nx = new Date(today.getTime() + 864e5);
+  $("ov").style.display = "flex";
+  $("ov").innerHTML = `<div class="box"><p>Di san? #${DAY}</p><div class="big">${fmt(t)}</div><small>od ${fmt(MAXTOTAL)} bodova</small>
+    <div class="em">${results.map(r => emoji(r.d)).join("")}</div><p style="color:var(--ink);font-weight:700">${esc(IME)}${IME?": ":""}${titula(t)}</p>
+    <div class="stats"><div><b>${st.n}</b>odigrano</div><div><b>${fmt(st.avg)}</b>prosjek</div><div><b>${fmt(st.best)}</b>rekord</div><div><b>${st.niz}🔥</b>dana u nizu</div></div>
+    <div class="rows">${results.map((r,i)=>`<div><span>${emoji(r.d)}</span><span>${LOCS[i].ime}</span><span>${r.d==null?"isteklo":fmt(r.d)+" km"} · ${fmt(r.p)}</span></div>`).join("")}</div>
+    <button id="sh">Podijeli rezultat</button><button class="sec" id="lb2">🏆 Ljestvica</button><p id="cd"></p>
+    <small>Slike: Mapillary (CC BY-SA) · ${[...new Set(LOCS.map(l=>l.autor).filter(Boolean))].join(", ")}</small></div>`;
+  $("lb2").onclick = showBoard;
+  $("sh").onclick = async () => {
+    const text = shareText();
+    try { if (navigator.share && /Mobi|Android|iPhone/i.test(navigator.userAgent)) { await navigator.share({ text }); return; } } catch(e){ return; }
+    try { await navigator.clipboard.writeText(text); $("sh").textContent = "Kopirano ✔ zalipi ekipi"; } catch(e){ prompt("Kopiraj:", text); }
+  };
+  const tick = () => { const s = Math.max(0, Math.floor((nx - Date.now())/1000));
+    $("cd").textContent = `Nova partija za ${String(Math.floor(s/3600)).padStart(2,"0")}:${String(Math.floor(s%3600/60)).padStart(2,"0")}:${String(s%60).padStart(2,"0")}`; };
+  tick(); setInterval(tick, 1000);
+}
+
+function showIntro(){
+  $("ov").innerHTML = `<div class="box"><h1>Di san?</h1><p style="color:var(--ink);font-size:18px">Partija #${DAY}</p>
+    <p>Bačen si na <b>8 mjesta</b> po Hrvatskoj. Okreni se oko sebe, ali s mjesta ne možeš.<br>Imaš <b>${TIME} sekundi</b> da na karti pokažeš di si.</p>
+    <p>Svako iduće mjesto je <b>teže</b> i nosi <b>više bodova</b>. Što bliže i što <b>brže</b> pogodiš, to više dobiješ (prvih ${FULL} s bodovi ×1,1).</p>
+    <input id="nick" maxlength="16" placeholder="Tvoj nadimak" value="${esc(IME)}" autocomplete="nickname"><button id="st">Kreni</button><p><small>Jedna partija dnevno. Svi igraju ista mjesta.</small></p></div>`;
+  $("st").onclick = () => {
+    const v = $("nick").value.trim(); if (v.length < 2){ $("nick").focus(); $("nick").style.borderColor = "var(--red)"; return; }
+    IME = v; store.set("disan-ime", IME); $("ov").style.display = "none"; startRound(); setTimeout(() => map.invalidateSize(), 50); };
+}
+
+fetch("dani.json").then(r => r.json()).then(dani => {
+  LOCS = dani[(DAY - 1) % dani.length]; initMap(); $("lb").onclick = showBoard;
+  const s = store.get(KEY);
+  if (s && s.results && s.results.length){ results = s.results; round = results.length; }
+  drawHead();
+  if (round >= N){ saveScore(); showEnd(); } else if (round > 0){ $("ov").style.display = "none"; startRound(); } else showIntro();
+}).catch(() => { $("ov").innerHTML = '<div class="box"><p>Ne mogu učitati lokacije. Osvježi stranicu.</p></div>'; });
+</script>
+</body>
+</html>
